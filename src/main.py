@@ -1,29 +1,5 @@
+from Messenger import *
 print "Welcome to RPG!"
-
-class Messenger :
-	message = "No Message"
-
-	def __init__(self):
-		print "Printing"
-
-	def aoran(self,str):
-		##determines whether or not a word should be preceeded by an a or an an
-		##not working for some reason, probably in the comparison
-		if (str[0] == "a" or str[0] == "e" or str[0] == "i" or str[0] == "o" or str[0] == "u") :
-			return "an %s" % str 
-		else :
-			return "a %s" % str
-
-	def appear(self,actor) :
-		print "%s has appeared!" % self.aoran(actor.name)
-
-	## These two functions will need to be altered (damage done is calculated by the victim, so
-	## there's no way to know how much damage an attack does at this point)
-	def hurt(self, attacker, victim, dmg) :
-		print "%s hits %s and does %i damage!" % (attacker.name, victim.name, dmg)
-
-	def status(self, actor):
-		print "%s has %i of %i HP remaining!" % (actor.name, actor.curHP, actor.maxHP )
 
 class Actor :
 	# anything that can participate in combat
@@ -50,13 +26,14 @@ class Actor :
 		self.init += 1
 
 	def act(self) :
-		self.advance()
 		if (self.curHP <= 0):
 			print "%s died" % self.name
 			self.dead = True
+			return
 		elif (self.init == self.actInit) :
 			self.attack(self.findTarget(self.dungeon))
 			self.init = 0
+		self.advance()
 
 	def attack(self,victim) :
 		victim.hurt(self.atk)
@@ -78,13 +55,11 @@ class Player(Actor) :
 		if (self.init == self.actInit):
 			print "Player's turn" 
 	
-
 class Dungeon :
 	monsters = []
 	size = 10
 
 	def __init__(self,size):
-		monsters = []
 		for x in xrange(0,size) :
 			self.monsters.append(Actor("%i" % x ,self))
 
@@ -103,3 +78,6 @@ while (exit != True) :
 			m.act()
 		else :
 			dungeon.monsters.remove(m)
+	if (p.dead == True):
+		print "Player died, game over!"
+		exit = True
