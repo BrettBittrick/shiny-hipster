@@ -17,6 +17,8 @@ class Messenger :
 	def appear(self,actor) :
 		print "%s has appeared!" % self.aoran(actor.name)
 
+	## These two functions will need to be altered (damage done is calculated by the victim, so
+	## there's no way to know how much damage an attack does at this point)
 	def hurt(self, attacker, victim, dmg) :
 		print "%s hits %s and does %i damage!" % (attacker.name, victim.name, dmg)
 
@@ -31,6 +33,7 @@ class Actor :
 	curHP = 100
 	maxHP = 100
 	atk = 10
+	message = Messenger()
 
 	def __init__(self,name):
 		self.name = name
@@ -44,14 +47,27 @@ class Actor :
 
 	def act(self) :
 		self.advance()
-		if (self.init == self.actInit) :
+		if (self.curHP <= 0):
+			print "blarg dead"
+		elif (self.init == self.actInit) :
 			self.init = 0
+
+	def attack(self,victim) :
+		victim.hurt(self.atk)
+		self.message.hurt(self,victim,self.atk)
+
+	def hurt(self, dmg):
+		#this will be made better later
+		self.curHP -= dmg
+		self.message.status(self)
 
 exit = False
 turn = 0
 
 x = Actor("Actor x")
 y = Actor("Monster y")
+x.attack(y)
+y.attack(x)
 while (exit != True) : 
 	x.act()
 
