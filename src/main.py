@@ -34,13 +34,17 @@ class Actor :
 	maxHP = 100
 	atk = 10
 	message = Messenger()
+	dungeon = 0
+	dead = False
 
-	def __init__(self,name):
+	def __init__(self,name,dungeon):
 		self.name = name
 		init = 0
 		actInit = 100
 		message = Messenger()
 		message.appear(self)
+		self.dungeon = dungeon
+		dead = False
 
 	def advance(self) :
 		self.init += 1
@@ -48,8 +52,10 @@ class Actor :
 	def act(self) :
 		self.advance()
 		if (self.curHP <= 0):
-			print "blarg dead"
+			print "%s died" % self.name
+			self.dead = True
 		elif (self.init == self.actInit) :
+			self.attack(self.findTarget(self.dungeon))
 			self.init = 0
 
 	def attack(self,victim) :
@@ -61,13 +67,27 @@ class Actor :
 		self.curHP -= dmg
 		self.message.status(self)
 
+	def findTarget(self, dungeon):
+		#we'll just have him attack the first guy in the list
+		if (len(dungeon.monsters) > 0) :
+			return dungeon.monsters[0]
+
+class Dungeon :
+	monsters = []
+	size = 10
+
+	def __init__(self,size):
+		monsters = []
+		for x in xrange(0,size) :
+			self.monsters.append(Actor("%i" % x ,self))	
+
 exit = False
-turn = 0
 
-x = Actor("Actor x")
-y = Actor("Monster y")
-x.attack(y)
-y.attack(x)
+dungeon = Dungeon(25)
+
 while (exit != True) : 
-	x.act()
-
+	for m in dungeon.monsters:
+		if (m.dead == False):
+			m.act()
+		else :
+			dungeon.monsters.remove(m)
