@@ -8,12 +8,20 @@ class Messenger :
 
 	def aoran(self,str):
 		##determines whether or not a word should be preceeded by an a or an an
-		if (str[0] == 'a' or str[0] == 'e' or str[0] == 'i' or str[0] == 'o' or str[0] == 'u') :
+		##not working for some reason, probably in the comparison
+		if (str[0] == "a" or str[0] == "e" or str[0] == "i" or str[0] == "o" or str[0] == "u") :
 			return "an %s" % str 
 		else :
 			return "a %s" % str
+
 	def appear(self,actor) :
 		print "%s has appeared!" % self.aoran(actor.name)
+
+	def hurt(self, attacker, victim, dmg) :
+		print "%s hits %s and does %i damage!" % (attacker.name, victim.name, dmg)
+
+	def status(self, actor):
+		print "%s has %i of %i HP remaining!" % (actor.name, actor.curHP, actor.maxHP )
 
 class Actor :
 	# anything that can participate in combat
@@ -43,6 +51,7 @@ exit = False
 turn = 0
 
 x = Actor("Actor x")
+y = Actor("Monster y")
 while (exit != True) : 
 	x.act()
 
