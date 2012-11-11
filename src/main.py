@@ -72,6 +72,13 @@ class Actor :
 		if (len(dungeon.monsters) > 0) :
 			return dungeon.monsters[0]
 
+class Player(Actor) :
+	def act(self) :
+		self.advance()
+		if (self.init == self.actInit):
+			print "Player's turn" 
+	
+
 class Dungeon :
 	monsters = []
 	size = 10
@@ -79,11 +86,16 @@ class Dungeon :
 	def __init__(self,size):
 		monsters = []
 		for x in xrange(0,size) :
-			self.monsters.append(Actor("%i" % x ,self))	
+			self.monsters.append(Actor("%i" % x ,self))
+
+	def append(self,actor) :
+		self.monsters.append(actor)
 
 exit = False
 
-dungeon = Dungeon(25)
+dungeon = Dungeon(5)
+p = Player("Player", dungeon)
+dungeon.monsters.append(p)
 
 while (exit != True) : 
 	for m in dungeon.monsters:
