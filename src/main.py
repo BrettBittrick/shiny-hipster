@@ -2,7 +2,7 @@ from Messenger import *
 from Actor import *
 from Player import *
 from Dungeon import *
-print "Welcome to RPG!"
+print "Welcome to RPG \"Shiny-Hipster\""
 
 exit = False
 
