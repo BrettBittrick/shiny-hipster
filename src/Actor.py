@@ -1,6 +1,7 @@
 from Messenger import *
 class Actor :
-	# anything that can participate in combat
+	"""Anything that can participate in combat"""
+
 	name = "mumei"
 	init = 0
 	actInit = 100

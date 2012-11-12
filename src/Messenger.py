@@ -2,7 +2,8 @@ class Messenger :
 	message = "No Message"
 
 	def __init__(self):
-		print "Printing"
+		#print "Printing"
+		self.message = "Initialized"
 
 	def aoran(self,str):
 		##determines whether or not a word should be preceeded by an a or an an
@@ -22,3 +23,7 @@ class Messenger :
 
 	def status(self, actor):
 		print "%s has %i of %i HP remaining!" % (actor.name, actor.curHP, actor.maxHP )
+
+	def prompt(self, message, prompt):
+		print message
+		print prompt
