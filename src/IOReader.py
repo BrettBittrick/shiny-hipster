@@ -14,8 +14,7 @@ class IOReader :
 			k = self.grabKey(line)
 			keys.update(k)
 			
-		print "Grabbed keys, here's what we have:"
-		print str(keys.items())
+			return keys
 
 	def grabKey(self,line):
 		#Accumulates characters into a string until it comes across a deliniator
@@ -27,6 +26,7 @@ class IOReader :
 		qCount = 0
 		for c in line :
 			if not (keyFound) :
+				#kill pesky newlines
 				if not (c == ":" or c == "\n"):
 					key = key + c
 				else :

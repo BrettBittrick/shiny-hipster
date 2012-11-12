@@ -1,4 +1,4 @@
-Name: 	"mumei"
-MaxHP:	"100"
-CurHP: 	"100"
+name: 	"mumei"
+maxHP:	"100"
+curHP: 	"100"
 attacks: "punch, kick"

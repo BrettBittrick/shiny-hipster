@@ -7,7 +7,7 @@ print "Welcome to RPG!"
 exit = False
 
 dungeon = Dungeon(1)
-p = Player("Player", dungeon)
+p = Player("../dat/actor/defaultPlayer.act", dungeon)
 dungeon.monsters.append(p)
 
 while (exit != True) : 

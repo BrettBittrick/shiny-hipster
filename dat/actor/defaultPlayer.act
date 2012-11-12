@@ -1,5 +1,5 @@
-Name: 	"Player"
-MaxHP:	"100"
-CurHP: 	"100"
+name: 	"Player"
+maxHP:	"100"
+curHP: 	"100"
 attacks: "punch, kick"
 

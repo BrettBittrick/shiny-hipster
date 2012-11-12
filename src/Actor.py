@@ -1,4 +1,5 @@
 from Messenger import *
+from IOReader import *
 import Attack
 class Actor :
 	"""Anything that can participate in combat"""
@@ -13,11 +14,14 @@ class Actor :
 	dungeon = 0
 	dead = False
 
-	def __init__(self,name,dungeon):
-		self.name = name
-		message = Messenger()
-		message.appear(self)
+	def __init__(self,path,dungeon):
 		self.dungeon = dungeon
+		#Read values from a file, then assign them to variables
+		io = IOReader(path)
+		k = io.parse()
+		self.name = k['name']
+		self.maxHP = int(k['maxHP'])
+		self.curHP = int(k['curHP'])
 
 	def advance(self) :
 		self.init += 1

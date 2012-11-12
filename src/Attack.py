@@ -10,4 +10,5 @@ class Attack :
 		self.initReq = initReq
 		self.cancels = cancels
 		self.damage = damage
+
 		
