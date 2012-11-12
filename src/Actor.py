@@ -28,11 +28,10 @@ class Actor :
 
 	def act(self) :
 		if (self.curHP <= 0):
-			print "%s died" % self.name
 			self.dead = True
 			return
 		elif (self.init == self.actInit) :
-			self.attack(self.findTarget(self.dungeon))
+			self.attack(self.getTarget(self.dungeon))
 			self.init = 0
 		self.advance()
 
@@ -45,7 +44,7 @@ class Actor :
 		self.curHP -= attack.damage
 		self.message.status(self)
 
-	def findTarget(self, dungeon):
+	def getTarget(self, dungeon):
 		#we'll just have him attack the first guy in the list
 		if (len(dungeon.monsters) > 0) :
 			return dungeon.monsters[0]

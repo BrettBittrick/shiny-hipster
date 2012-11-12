@@ -13,8 +13,9 @@ class IOReader :
 		for line in self.f :
 			k = self.grabKey(line)
 			keys.update(k)
+			#print str(keys.items())
 			
-			return keys
+		return keys
 
 	def grabKey(self,line):
 		#Accumulates characters into a string until it comes across a deliniator
@@ -29,7 +30,7 @@ class IOReader :
 				#kill pesky newlines
 				if not (c == ":" or c == "\n"):
 					key = key + c
-				else :
+				elif (c == ":"):
 					keys[key] = "novalyet"
 					keyFound = True
 			elif not (c == "\n"):
