@@ -1,0 +1,5 @@
+Name: 	"Player"
+MaxHP:	"100"
+CurHP: 	"100"
+attacks: "punch, kick"
+
