@@ -3,6 +3,8 @@ from Messenger import *
 class Player(Actor) :
 	mess = Messenger()
 	def act(self) :
+		if (self.curHP <= 0) :
+			self.dead = True
 		self.advance()
 		if (self.init == self.actInit):
 			index = 0

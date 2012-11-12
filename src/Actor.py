@@ -1,4 +1,5 @@
 from Messenger import *
+import Attack
 class Actor :
 	"""Anything that can participate in combat"""
 
@@ -32,12 +33,12 @@ class Actor :
 		self.advance()
 
 	def attack(self,victim) :
-		victim.hurt(self.atk)
+		a = Attack.Attack(0,False,self.atk)
+		victim.hurt(a)
 		self.message.hurt(self,victim,self.atk)
 
-	def hurt(self, dmg):
-		#this will be made better later
-		self.curHP -= dmg
+	def hurt(self, attack):
+		self.curHP -= attack.damage
 		self.message.status(self)
 
 	def findTarget(self, dungeon):
