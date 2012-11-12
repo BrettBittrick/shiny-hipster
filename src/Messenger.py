@@ -26,4 +26,4 @@ class Messenger :
 
 	def prompt(self, message, prompt):
 		print message
-		print prompt
+		return raw_input(prompt) 

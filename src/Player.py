@@ -5,8 +5,19 @@ class Player(Actor) :
 	def act(self) :
 		self.advance()
 		if (self.init == self.actInit):
-			index = 1
+			index = 0
+			self.init = 0
 			for m in self.dungeon.monsters :
 				print "(%i) %s %s" % (index, m.name, self.mess.status(m))
 				index += 1
-			self.mess.prompt("Who do you wish to attack?", "%s>" % self.name)	
+
+			self.attack(self.dungeon.monsters[self.getTarget()])
+
+	def getTarget(self):
+		target = self.mess.prompt("What do you wish to attack?",
+			"%s >" % self.name)
+		while not (int(target) < len(self.dungeon.monsters)):
+			self.getTarget()
+			target = self.mess.prompt("What do you wish to attack?",
+			"%s >" % self.name)
+		return int(target)

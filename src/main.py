@@ -6,7 +6,7 @@ print "Welcome to RPG!"
 
 exit = False
 
-dungeon = Dungeon(5)
+dungeon = Dungeon(1)
 p = Player("Player", dungeon)
 dungeon.monsters.append(p)
 
