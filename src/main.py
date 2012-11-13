@@ -6,7 +6,7 @@ print "Welcome to RPG \"Shiny-Hipster\""
 
 exit = False
 
-dungeon = Dungeon(1)
+dungeon = Dungeon(10)
 p = Player("../dat/actor/defaultPlayer.act", dungeon)
 dungeon.monsters.append(p)
 

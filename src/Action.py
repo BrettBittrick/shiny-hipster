@@ -7,6 +7,9 @@ class Action :
 	def __init__(self, name, initReq):
 		self.initReq = initReq
 
+	def doAct(self):
+		print "Doing something"
+
 class Attack(Action):
 
 	name = "Unnamed Attack"
