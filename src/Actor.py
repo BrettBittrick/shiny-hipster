@@ -1,18 +1,15 @@
 from Messenger import *
 from IOReader import *
-import Attack
+import Action
+import random
 class Actor :
 	"""Anything that can participate in combat"""
-
-	name = "mumei"
 	init = 0
-	actInit = 100
-	curHP = 100
-	maxHP = 100
-	atk = 10
-	message = Messenger()
+	chooseInit = 100
+	actInit = 125 #temp value so we can do the first comparison
 	dungeon = 0
-	dead = False
+	nextAct = Action.Action("blah",25)
+	alive = True
 
 	def __init__(self,path,dungeon):
 		self.dungeon = dungeon
@@ -23,28 +20,34 @@ class Actor :
 		self.maxHP = int(k['maxHP'])
 		self.curHP = int(k['curHP'])
 
+		#set init to a random value to spice things up
+		random.seed()
+		self.init = random.randrange(0,self.actInit)
+
+	def tick(self):
+		self.alive = (self.curHP > 0)
+		if (self.alive) :	
+			if (self.init == self.chooseInit):
+				#choose action
+				self.nextAct = self.getAct()
+				self.actInit = self.chooseInit + self.nextAct.initReq
+			elif (self.init == self.actInit):
+				self.nextAct.doAct()
+				self.init = 0
+
+		self.advance()
+
 	def advance(self) :
 		self.init += 1
 
-	def act(self) :
-		if (self.curHP <= 0):
-			self.dead = True
-			return
-		elif (self.init == self.actInit) :
-			self.attack(self.getTarget(self.dungeon))
-			self.init = 0
-		self.advance()
+	def getAct(self):
+		#just attack the first monster in the dungeon
+		return Action.Attack("No name",50,25,False,self.getTarget(self.dungeon))
 
-	def attack(self,victim) :
-		a = Attack.Attack(0,False,self.atk)
-		victim.hurt(a)
-		self.message.hurt(self,victim,self.atk)
+	def getTarget(self,dungeon):
+		#add code to make sure 
+		return self.dungeon.monsters[0]
 
-	def hurt(self, attack):
-		self.curHP -= attack.damage
-		self.message.status(self)
+	def hurt(self,action):
+		self.curHP -= action.damage
 
-	def getTarget(self, dungeon):
-		#we'll just have him attack the first guy in the list
-		if (len(dungeon.monsters) > 0) :
-			return dungeon.monsters[0]

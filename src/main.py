@@ -12,10 +12,10 @@ dungeon.monsters.append(p)
 
 while (exit != True) : 
 	for m in dungeon.monsters:
-		if (m.dead == False):
-			m.act()
+		if (m.alive):
+			m.tick()
 		else :
 			dungeon.monsters.remove(m)
-	if (p.dead == True):
+	if (p.alive == False):
 		print "Player died, game over!"
 		exit = True
