@@ -8,8 +8,9 @@ class Actor :
 	chooseInit = 100
 	actInit = 125 #temp value so we can do the first comparison
 	dungeon = 0
-	nextAct = Action.Action("blah",25)
+	nextAct = Action.Action("noaction",25)
 	alive = True
+	conditions = []
 
 	def __init__(self,path,dungeon):
 		self.dungeon = dungeon
@@ -35,6 +36,11 @@ class Actor :
 				self.nextAct.doAct()
 				self.init = 0
 
+		for c in self.conditions :
+			c.condTick()
+			if (c.duration == 0):
+				self.conditions.remove(c)
+
 		self.advance()
 
 	def advance(self) :
@@ -50,4 +56,8 @@ class Actor :
 
 	def hurt(self,action):
 		self.curHP -= action.damage
+
+	def addCondition(self,condition):
+		self.conditions.append(condition)
+
 

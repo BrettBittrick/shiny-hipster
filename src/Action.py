@@ -27,3 +27,9 @@ class Attack(Action):
 
 	def doAct(self):
 		self.target.hurt(self)
+
+class Hurt(Action) :
+	target = ""
+	def __init__(self,target,amt):
+		print "do stuff"
+		self.target = target

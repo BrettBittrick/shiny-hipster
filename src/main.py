@@ -2,12 +2,16 @@ from Messenger import *
 from Actor import *
 from Player import *
 from Dungeon import *
+#kill this later
+from Condition import *
 print "Welcome to RPG \"Shiny-Hipster\""
 
 exit = False
 
 dungeon = Dungeon(10)
 p = Player("../dat/actor/defaultPlayer.act", dungeon)
+c = Condition()
+p.addCondition(c)
 dungeon.monsters.append(p)
 
 while (exit != True) : 
